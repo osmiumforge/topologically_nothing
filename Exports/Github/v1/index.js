@@ -214,7 +214,7 @@ var Utils = {
 Function('return this')()['Engine'] = (function() {
 	var preloader = new Preloader();
 
-	var wasmPath = '/topologically_nothing/Exports/Github/Template/godot.wasm';
+	var wasmPath = '/topologically_nothing/Exports/Github/Template/constant.wasm';
 	var unloadAfterInit = true;
 	var loadPath = '';
 	var loadPromise = null;
