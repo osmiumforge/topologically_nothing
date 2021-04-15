@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+uniform ivec2 square_size;
+
+const float PI = 3.14159265358979323846;
+void fragment(){
+	METALLIC = 0.0;
+	float p = (UV.x*6.0*PI);
+	vec2 ss = 1.0/vec2(square_size);
+	if (mod(UV.x, ss.x*2.0)<ss.x != mod(UV.y, ss.y*2.0)<ss.y){
+		ALBEDO = vec3(0.0,0.0,0.0);
+	}
+	else {
+		ALBEDO = vec3(sin(p),sin(p+(PI*2.0/3.0)),sin(p-(PI*2.0/3.0)));
+		ALBEDO /= min(ALBEDO.r, min(ALBEDO.g, ALBEDO.b));
+	}
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/square_size = PoolIntArray( 80, 40 )

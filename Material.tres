@@ -1,0 +1,79 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+uniform bool active;
+uniform int cycles;
+void cycle_pos(inout vec3 pos, in vec3 opos){
+	float x = 0.0;
+	float y = 0.0;
+	float z = 0.0;
+	x -= pos.x*pos.x;
+	z += pos.x*pos.y;
+	y -= pos.x*pos.z;
+	x += pos.x*opos.x;
+	// = pos.x*opos.y;
+	y += pos.x*opos.z;
+	y += pos.x;
+	
+	x -= pos.y*pos.x;
+	z += pos.y*pos.y;
+	y -= pos.y*pos.z;
+	x += pos.y*opos.x;
+	x += pos.y*opos.y;
+	x -= pos.y*opos.z;
+	z += pos.y;
+	
+	z += pos.z*pos.x;
+	x -= pos.z*pos.y;
+	y += pos.z*pos.z;
+	x -= pos.z*opos.x;
+	z -= pos.z*opos.y;
+	x -= pos.z*opos.z;
+	z -= pos.z;
+	
+	x -= opos.x*pos.x;
+	y -= opos.x*pos.y;
+	x -= opos.x*pos.z;
+	z -= opos.x*opos.x;
+	x += opos.x*opos.y;
+	z += opos.x*opos.z;
+	z -= opos.x;
+	
+	z -= opos.y*pos.x;
+	z -= opos.y*pos.y;
+	//-= opos.y*pos.z;
+	y += opos.y*opos.x;
+	x -= opos.y*opos.y;
+	x += opos.y*opos.z;
+	y += opos.y;
+	
+	//-= opos.z*pos.x;
+	z += opos.z*pos.y;
+	x += opos.z*pos.z;
+	z += opos.z*opos.x;
+	x += opos.z*opos.y;
+	//+= opos.z*opos.z;
+	z += opos.z;
+	pos = vec3(x,y,z);
+	//pos = vec3((pos.x*pos.z*-2.0)-pos.y, (pos.x*pos.x)-(pos.y*pos.z*-2.0), (pos.x*pos.y*2.0)-(pos.z*pos.z))+opos;
+}
+void vertex(){
+	if (active) {
+		vec3 ov = VERTEX;
+		for (int i=0; i<cycles; i++){
+			cycle_pos(VERTEX, ov);
+		}
+	}
+}
+void fragment(){
+	METALLIC = 0.5;
+	if (mod(UV.x, 0.1)<0.05 != mod(UV.y, 0.1)<0.05){
+		ALBEDO = vec3(0);
+	}
+}"
+
+[resource]
+shader = SubResource( 3 )
+shader_param/active = true
+shader_param/cycles = 1
