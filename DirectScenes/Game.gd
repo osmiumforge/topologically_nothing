@@ -8,4 +8,4 @@ func _process(_d):
 		get_tree().reload_current_scene()
 	if Input.is_action_just_pressed("shape_custom"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		get_tree().change_scene("res://CustomSeed.tscn")
+		get_tree().change_scene("res://DirectScenes/CustomSeed.tscn")

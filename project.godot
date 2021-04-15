@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "MeshInstance",
 "class": "MorphedMesh",
 "language": "GDScript",
-"path": "res://MeshAdapt.gd"
+"path": "res://ScenelessScripts/MeshAdapt.gd"
 } ]
 _global_script_class_icons={
 "MorphedMesh": ""
@@ -21,12 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="topologically, Nothing"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://DirectScenes/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-ShapeOptions="*res://ShapeOptions.gd"
+ShapeOptions="*res://ScenelessScripts/ShapeOptions.gd"
 
 [input]
 
