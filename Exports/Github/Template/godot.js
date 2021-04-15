@@ -214,7 +214,7 @@ var Utils = {
 Function('return this')()['Engine'] = (function() {
 	var preloader = new Preloader();
 
-	var wasmExt = '.wasm';
+	var wasmPath = '/Exports/Github/Template/godot.wasm';
 	var unloadAfterInit = true;
 	var loadPath = '';
 	var loadPromise = null;
@@ -226,7 +226,7 @@ Function('return this')()['Engine'] = (function() {
 	function load(basePath) {
 		if (loadPromise == null) {
 			loadPath = basePath;
-			loadPromise = preloader.loadPromise(basePath + wasmExt);
+			loadPromise = preloader.loadPromise(wasmPath);
 			preloader.setProgressFunc(progressFunc);
 			requestAnimationFrame(preloader.animateProgress);
 		}
